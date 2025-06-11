@@ -1,13 +1,17 @@
 # rich_color_support/__init__.py
 import logging
 import random
-
+import typing
 from enum import StrEnum
 
 logger = logging.getLogger(__name__)
 
 
-class RichColors(StrEnum):
+class RichColorsBase(StrEnum):
+    pass
+
+
+class RichColors(RichColorsBase):
     """Rich descriptive color names for 8-bit terminal colors (excluding basic, bright, and grey colors)"""  # noqa: E501
 
     NAVY_BLUE = "navy_blue"
@@ -168,7 +172,7 @@ class RichColors(StrEnum):
     CORNSILK1 = "cornsilk1"
 
 
-class RichColors8(StrEnum):
+class RichColors8(RichColorsBase):
     """8 most essential, high-contrast colors for terminal text"""
 
     RED = "red1"
@@ -181,7 +185,7 @@ class RichColors8(StrEnum):
     ORANGE = "orange1"
 
 
-class RichColors16(StrEnum):
+class RichColors16(RichColorsBase):
     """16 popular, well-distinguished colors for terminal text"""
 
     RED = "red1"
@@ -202,7 +206,7 @@ class RichColors16(StrEnum):
     CHARTREUSE = "chartreuse1"
 
 
-class RichColors32(StrEnum):
+class RichColors32(RichColorsBase):
     """32 readable, distinguishable colors for rich terminal interfaces"""
 
     RED = "red1"
@@ -239,7 +243,7 @@ class RichColors32(StrEnum):
     TAN = "tan"
 
 
-class RichColors64(StrEnum):
+class RichColors64(RichColorsBase):
     """64 professional colors for advanced terminal applications"""
 
     RED = "red1"
@@ -308,7 +312,7 @@ class RichColors64(StrEnum):
     DARK_SLATE_GRAY = "dark_slate_gray1"
 
 
-def get_color_set(size: int) -> list[str]:
+def get_color_set(size: int) -> typing.List[RichColorsBase]:
     """Get a color set of specified size"""
 
     if size > len(RichColors64):
@@ -332,3 +336,16 @@ def get_color_set(size: int) -> list[str]:
     else:
         logger.warning(f"Invalid size: {size}, returning 8 colors")
         return list(RichColors8)
+
+
+class RichColorRotator:
+    def __init__(self, size: int):
+        self.size = size
+        self.colors = get_color_set(size)
+        random.shuffle(self.colors)
+
+    def pick(self) -> RichColorsBase:
+        if len(self.colors) == 0:
+            self.colors = get_color_set(self.size)
+            random.shuffle(self.colors)
+        return self.colors.pop()
