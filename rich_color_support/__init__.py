@@ -339,7 +339,7 @@ def get_color_set(size: int) -> typing.List[RichColorsBase]:
 
 
 class RichColorRotator:
-    def __init__(self, size: int):
+    def __init__(self, size: int = 16):
         self.size = size
         self.colors = get_color_set(size)
         random.shuffle(self.colors)
