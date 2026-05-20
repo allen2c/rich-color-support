@@ -1,18 +1,23 @@
 [project]
 authors = [{ name = "Allen Chou", email = "f1470891079@gmail.com" }]
-dependencies = ["rich (>=13.0.0,<15.0.0)"]
+dependencies = ["rich (>=13.0.0,<16.0.0)"]
 description = "Rich supports colors."
 license = { text = "MIT" }
 name = "rich-color-support"
 readme = "README.md"
 requires-python = ">=3.11,<4"
-version = "0.1.0"
+version = "0.2.0"
 
 [project.urls]
 "Bug Tracker" = "https://github.com/allen2c/rich-color-support/issues"
 Documentation = "https://allen2c.github.io/rich-color-support"
 Homepage = "https://github.com/allen2c/rich-color-support"
 Repository = "https://github.com/allen2c/rich-color-support"
+
+[tool.poetry]
+include = [
+    { path = "rich_color_support/py.typed", format = ["sdist", "wheel"] },
+]
 
 [tool.poetry.group.dev.dependencies]
 black = "*"
