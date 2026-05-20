@@ -14,6 +14,11 @@ Documentation = "https://allen2c.github.io/rich-color-support"
 Homepage = "https://github.com/allen2c/rich-color-support"
 Repository = "https://github.com/allen2c/rich-color-support"
 
+[tool.poetry]
+include = [
+    { path = "rich_color_support/py.typed", format = ["sdist", "wheel"] },
+]
+
 [tool.poetry.group.dev.dependencies]
 black = "*"
 isort = "*"
