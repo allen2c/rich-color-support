@@ -39,6 +39,41 @@ for i in range(20):
     console.print(f"Message {i}", style=f"color {color}")
 ```
 
+## What's new in v0.2.0
+
+### Semantic colors and themes
+
+```python
+from rich.console import Console
+from rich_color_support import SemanticColors, dark_theme
+
+console = Console(theme=dark_theme())
+console.print("[success]Build passed[/]")
+console.print(f"[{SemanticColors.ERROR}]Tests failed[/]")
+```
+
+Eight themes are available: `default_theme`, `dark_theme`, `light_theme`,
+`high_contrast_theme`, `monochrome_theme`, `colorblind_theme` (Okabe-Ito
+inspired), `pastel_theme`, `monokai_theme`. Use `build_theme()` for partial
+overrides.
+
+### Filter helpers
+
+```python
+from rich_color_support import RichColors, filter_colors
+
+dark_blues = filter_colors(RichColors, hue="blue", brightness="dark")
+vivid_warm = filter_colors(RichColors, temperature="warm", saturation="vivid")
+```
+
+### Preview and CLI
+
+```bash
+python -m rich_color_support preview --hue blue
+python -m rich_color_support themes
+python -m rich_color_support theme dark --demo
+```
+
 ## Color Sets
 
 | Class          | Colors | Description                            |
